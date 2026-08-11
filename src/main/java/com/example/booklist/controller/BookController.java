@@ -6,6 +6,7 @@ import com.example.booklist.dto.BookUpdateRequest;
 import com.example.booklist.service.BookService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,5 +40,11 @@ public class BookController {
     @PutMapping("/{id}")
     public BookResponse updateBook(@PathVariable UUID id, @Valid @RequestBody BookUpdateRequest request) {
         return bookService.updateBook(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBook(@PathVariable UUID id) {
+        bookService.deleteBook(id);
     }
 }

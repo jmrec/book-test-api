@@ -48,4 +48,9 @@ public class BookService {
 
         return bookMapper.toResponse(bookRepository.save(existingBook));
     }
+
+    public void deleteBook(UUID id) {
+        getBookByIdOrThrow(id);
+        bookRepository.deleteById(id);
+    }
 }
