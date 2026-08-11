@@ -36,8 +36,8 @@ public class BookController {
         return bookService.createBook(request);
     }
 
-    @PutMapping
-    public BookResponse updateBook(@Valid @RequestBody BookUpdateRequest request) {
-        return bookService.updateBook(request);
+    @PutMapping("/{id}")
+    public BookResponse updateBook(@PathVariable UUID id, @Valid @RequestBody BookUpdateRequest request) {
+        return bookService.updateBook(id, request);
     }
 }

@@ -41,8 +41,8 @@ public class BookService {
         return bookMapper.toResponse(bookRepository.save(book));
     }
 
-    public BookResponse updateBook(BookUpdateRequest request) {
-        Book existingBook = getBookByIdOrThrow(request.id());
+    public BookResponse updateBook(UUID id, BookUpdateRequest request) {
+        Book existingBook = getBookByIdOrThrow(id);
 
         bookMapper.updateEntityFromRequest(request, existingBook);
 
