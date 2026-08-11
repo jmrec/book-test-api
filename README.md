@@ -30,7 +30,7 @@ java -jar booklist.jar
 
 ```bash
 # Optional Seeding
-# SEED_DB=always
+# SEED_DB=always java -jar booklist.jar
 
 java -jar booklist.jar
 ```
