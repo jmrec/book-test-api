@@ -7,8 +7,11 @@ import com.example.booklist.service.BookService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,8 +36,16 @@ public class BookController {
     }
 
     @PostMapping
-    public BookResponse createBook(@Valid @RequestBody BookCreateRequest request) {
-        return bookService.createBook(request);
+    public ResponseEntity<BookResponse> createBook(@Valid @RequestBody BookCreateRequest request) {
+        BookResponse createdBook = bookService.createBook(request);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                                                  .path("/{id}")
+                                                  .buildAndExpand(createdBook.id())
+                                                  .toUri();
+
+        return ResponseEntity.created(location)
+                             .body(createdBook);
     }
 
     @PutMapping("/{id}")
